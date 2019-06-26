@@ -1,7 +1,12 @@
-// import 'dotenv/config';
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-// console.log('Hello World! Its Fullstack Developer kiran here... ');
+import App from './App';
 
-// console.log(process.env.MY_SECRET);
 
-console.log('Hello Webpack Project.');
+ReactDOM.render(
+<App/>,
+document.getElementById('app')
+);
+
+module.hot.accept();

@@ -1,15 +1,17 @@
+const webpack = require('webpack');
+
 module.exports = {
   // 1
   entry: './src/index.js',
   module: {
     rules: [
       {
-        test: /\.(js)$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: ['babel-loader']
       },
       {
-        test: /\.less$/,
+        test: /\.(css|less)$/,
         use: [
           {
             loader: "style-loader"
@@ -19,18 +21,19 @@ module.exports = {
             options: {
               sourceMap: true,
               modules: true,
+              url:false,
               localIdentName: "[local]___[hash:base64:5]"
             }
           },
           {
-            loader: "less-loader"
+            loader: "less-loader",
           }
         ]
-      }
+      },
     ]
   },
   resolve: {
-    extensions: ['*', '.js']
+    extensions: ['*', '.js', '.jsx']
   },
   // 2
   output: {
@@ -38,8 +41,12 @@ module.exports = {
     publicPath: '/',
     filename: 'bundle.js'
   },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin()
+  ],
   // 3
   devServer: {
-    contentBase: './public'
+    contentBase: './public',
+    hot: true
   }
 };
